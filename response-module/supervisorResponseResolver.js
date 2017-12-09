@@ -10,7 +10,7 @@ exports.resolveResponse = function(messageFromUser){
         return responseMessage;
     }
     else if(messageFromUser.includes('approve')){
-        requestify.get('http://clickchain.ourtimesheet.com:8080/timesheets/review-jarvis',timesheetReviewModel).then(function(response) {
+        requestify.get('http://clickchain.hourtimesheet.com:8080/timesheets/review-jarvis', JSON.stringify(timesheetReviewModel)).then(function(response) {
             // Get the response body
             response.getBody();
             return responseMessage;
@@ -18,14 +18,14 @@ exports.resolveResponse = function(messageFromUser){
     }
     else if(messageFromUser.includes('clockin')){
         responseMessage = 'clockin';
-        requestify.post('http://clickchain.ourtimesheet.com:8080/webclock/punch/in', userModel).then(function(response) {
+        requestify.post('http://clickchain.hourtimesheet.com:8080/webclock/punch/in', JSON.stringify(userModel)).then(function(response) {
             // Get the response body
             response.getBody();
             return responseMessage;
         });
     }
     else if(messageFromUser.includes('clockout')){
-        requestify.post('http://clickchain.ourtimesheet.com:8080/webclock/punch/out', userModel).then(function(response) {
+        requestify.post('http://clickchain.hourtimesheet.com:8080/webclock/punch/out', JSON.stringify(userModel)).then(function(response) {
             // Get the response body
             response.getBody();
             return responseMessage;
