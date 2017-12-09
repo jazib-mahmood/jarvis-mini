@@ -1,12 +1,6 @@
 var exports = module.exports = {};
+var supervisorResponseResolver = require('./supervisorResponseResolver');
 
 exports.getResponse = function(messageFromUser){
-    var response = '';
-    if(messageFromUser.includes('hi')){
-        response = 'hey';
-    }
-    else{
-        response = 'idk what you saying man';
-    }
-     return response;
+    return supervisorResponseResolver.resolveResponse(messageFromUser);
 };
