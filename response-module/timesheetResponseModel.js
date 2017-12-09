@@ -1,6 +1,6 @@
 var exports = module.exports= {};
 
-exports.timesheetResponseModel = function(){
+exports.TimesheetResponseModel = function(){
     this.startDate = '';
     this.endDate = '';
     this.statuses = ["SUBMITTED, UNSUBMITTED, APPROVED, REJECTED, PROCESSED"];

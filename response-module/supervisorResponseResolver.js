@@ -1,16 +1,16 @@
 var exports = module.exports = {};
 const requestify = require('requestify');
-const timesheetReviewsModel = new require('./timesheetResponseModel').timesheetResponseModel();
-const userModel = new require('./userModel').userModel();
-
+const userModelCreator = require('./userModel');
+const userModel = new userModelCreator.UserModel();
+const timesheetReviewsModelCreator =require('./timesheetResponseModel');
+const timesheetReviewModel = new timesheetReviewsModelCreator.TimesheetResponseModel();
 exports.resolveResponse = function(messageFromUser){
     if(messageFromUser.includes('hi')){
         responseMessage = 'hey';
         return responseMessage;
     }
     else if(messageFromUser.includes('approve')){
-        responseMessage = 'approve';
-        requestify.get('http://clickchain.ourtimesheet.com:8080/timesheets/review-jarvis',timesheetReviewsModel).then(function(response) {
+        requestify.get('http://clickchain.ourtimesheet.com:8080/timesheets/review-jarvis',timesheetReviewModel).then(function(response) {
             // Get the response body
             response.getBody();
             return responseMessage;
@@ -32,6 +32,6 @@ exports.resolveResponse = function(messageFromUser){
         });
     }
     else{
-        responseMessage = 'idk what you saying man';
+       return responseMessage = 'idk what you saying man';
     }
 };
