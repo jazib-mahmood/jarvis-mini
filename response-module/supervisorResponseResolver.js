@@ -10,7 +10,7 @@ exports.resolveResponse = function(messageFromUser){
         return responseMessage;
     }
     else if(messageFromUser.includes('approve')){
-        requestify.get('http://clickchain.hourtimesheet.com:8080/timesheets/review-jarvis', JSON.stringify(timesheetReviewModel)).then(function(response) {
+        requestify.get('http://localhost:3978/posts/1').then(function(response) {
             // Get the response body
             response.getBody();
             return responseMessage;
