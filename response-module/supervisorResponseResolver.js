@@ -6,12 +6,14 @@ const userModel = new require('./userModel').userModel();
 exports.resolveResponse = function(messageFromUser){
     if(messageFromUser.includes('hi')){
         responseMessage = 'hey';
+        return responseMessage;
     }
     else if(messageFromUser.includes('approve')){
         responseMessage = 'approve';
         requestify.get('http://clickchain.ourtimesheet.com:8080/timesheets/review-jarvis',timesheetReviewsModel).then(function(response) {
             // Get the response body
             response.getBody();
+            return responseMessage;
         });
     }
     else if(messageFromUser.includes('clockin')){
@@ -19,16 +21,17 @@ exports.resolveResponse = function(messageFromUser){
         requestify.post('http://clickchain.ourtimesheet.com:8080/webclock/punch/in', userModel).then(function(response) {
             // Get the response body
             response.getBody();
+            return responseMessage;
         });
     }
     else if(messageFromUser.includes('clockout')){
         requestify.post('http://clickchain.ourtimesheet.com:8080/webclock/punch/out', userModel).then(function(response) {
             // Get the response body
             response.getBody();
+            return responseMessage;
         });
     }
     else{
         responseMessage = 'idk what you saying man';
     }
-     return responseMessage;
 };
