@@ -11,7 +11,3 @@ it('Main page content', function(done) {
      done();
  });
 
-it('Main page content', function(done) {
-    expect (responseEvaluator.getResponse('clockin')).to.equal('clockin')
-     done();
- });

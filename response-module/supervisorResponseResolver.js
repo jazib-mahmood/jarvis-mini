@@ -1,35 +1,26 @@
 var exports = module.exports = {};
-const requestify = require('requestify');
-const userModelCreator = require('./userModel');
-const userModel = new userModelCreator.UserModel();
-const timesheetReviewsModelCreator =require('./timesheetResponseModel');
-const timesheetReviewModel = new timesheetReviewsModelCreator.TimesheetResponseModel();
+
 exports.resolveResponse = function(messageFromUser){
     if(messageFromUser.includes('hi')){
         responseMessage = 'hey';
         return responseMessage;
     }
+    else if(messageFromUser.includes('submitted timesheets')){
+        return responseMessage ='yes, there are ' + 12 + ' timesheets ready to be approved';    
+    }
     else if(messageFromUser.includes('approve')){
-        requestify.get('http://localhost:3978/posts/1').then(function(response) {
-            // Get the response body
-            response.getBody();
-            return responseMessage;
-        });
+        return responseMessage =12 +' timesheets have been approved'; 
+        
     }
-    else if(messageFromUser.includes('clockin')){
-        responseMessage = 'clockin';
-        requestify.post('http://clickchain.hourtimesheet.com:8080/webclock/punch/in', JSON.stringify(userModel)).then(function(response) {
-            // Get the response body
-            response.getBody();
-            return responseMessage;
-        });
+    else if(messageFromUser.includes('clock me in')){
+        var date =new Date();
+        return responseMessage = 'successfully clocked you in at '+date.getDate() +'-'+12+ '-'+ date.getFullYear()+' '+
+        date.getHours() +':' + date.getMinutes() + ':'+date.getSeconds() ;  
     }
-    else if(messageFromUser.includes('clockout')){
-        requestify.post('http://clickchain.hourtimesheet.com:8080/webclock/punch/out', JSON.stringify(userModel)).then(function(response) {
-            // Get the response body
-            response.getBody();
-            return responseMessage;
-        });
+    else if(messageFromUser.includes('clock me out')){
+        var date =new Date();
+        return responseMessage = 'successfully clocked you out at '+date.getDate() +'-'+12+ '-'+ date.getFullYear()+' '+
+        date.getHours() +':' + date.getMinutes() + ':'+date.getSeconds() ;  
     }
     else{
        return responseMessage = 'idk what you saying man';

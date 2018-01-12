@@ -14,6 +14,8 @@ const connector = new builder.ChatConnector({
 
 server.post('/api/messages', connector.listen());
 
+connector.listen()
+
 var bot = new builder.UniversalBot(connector, function (session) {
     session.send(responseEvaluator.getResponse(session.message.text));
 });
